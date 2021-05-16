@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".addParticipantsActivity">
+
+    <TextView
+        android:id="@+id/xadpTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Participants"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/xpartImg"
+        android:layout_width="320px"
+        android:layout_height="320px"
+        android:layout_marginTop="40dp"
+        app:srcCompat="@android:mipmap/sym_def_app_icon" />
+
+
+    <TextView
+        android:id="@+id/xpartName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:text="NAME"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/xpartPosition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="position" />
+
+    <EditText
+        android:id="@+id/xpartID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:ems="10"
+        android:layout_marginTop="15dp"
+        android:inputType="number"
+        android:maxLength="15"
+        android:hint="ID Number" />
+
+
+    <TextView
+        android:id="@+id/xpartIn1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="15dp"
+        android:text="in: 8:00 AM, out: 12:15 PM" />
+
+    <TextView
+        android:id="@+id/xpartIn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="in: 8:00 AM, out: 12:15 PM" />
+</LinearLayout>

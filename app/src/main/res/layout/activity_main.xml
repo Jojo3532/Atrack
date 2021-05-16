@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="25sp"
+        android:text="@string/sign_in"
+        android:layout_marginTop="100sp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/xusername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        android:hint="@string/user_name"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/xpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textAlignment="center"
+        android:inputType="textPassword"
+        android:hint="@string/password"
+        android:importantForAutofill="no" />
+
+    <Button
+        android:layout_marginTop="20sp"
+        android:id="@+id/xbtnLogIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/log_in" />
+
+    <TextView
+        android:id="@+id/xsignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:clickable="true"
+        android:text="@string/sign_up"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:focusable="true" />
+
+
+</LinearLayout>
