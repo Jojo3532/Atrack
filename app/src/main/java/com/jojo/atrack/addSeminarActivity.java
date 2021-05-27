@@ -44,9 +44,9 @@ public class addSeminarActivity extends AppCompatActivity {
                 Boolean isValid = false;
                 if(isdtValid() && jcls.isNotEmpty(etTitle.getText().toString())){
                     if (DB.insertSeminar(addSeminarActivity.this, etTitle.getText().toString(), etStart.getText().toString(), etEnd.getText().toString())){
-                        Toast.makeText(addSeminarActivity.this, "New Seminar added", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(addSeminarActivity.this, addParticipantsActivity.class);
                         intent.putExtra("Title", etTitle.getText().toString());
+                        intent.putExtra("SeminarID", DB.getSeminarID(addSeminarActivity.this));
                         startActivity(intent);
                     }else {
                         //Toast.makeText(addSeminarActivity.this, "Unable to add to the database", Toast.LENGTH_LONG).show();
@@ -70,5 +70,11 @@ public class addSeminarActivity extends AppCompatActivity {
         }catch (Exception ee){
             return false;
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
     }
 }

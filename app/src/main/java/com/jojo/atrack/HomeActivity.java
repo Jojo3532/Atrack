@@ -1,7 +1,6 @@
 package com.jojo.atrack;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,9 +31,13 @@ public class HomeActivity extends AppCompatActivity {
         Toast.makeText(HomeActivity.this, "View Seminars Clicked", Toast.LENGTH_LONG);
     }
 
-
-
     public void participants_click(View v){
 
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        finishAffinity();
     }
 }
