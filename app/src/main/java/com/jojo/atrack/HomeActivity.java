@@ -28,7 +28,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void viewSeminars_click(View v){
-        Toast.makeText(HomeActivity.this, "View Seminars Clicked", Toast.LENGTH_LONG);
+        Intent intent = new Intent(HomeActivity.this, viewSeminarActivity.class);
+        startActivity(intent);
     }
 
     public void participants_click(View v){

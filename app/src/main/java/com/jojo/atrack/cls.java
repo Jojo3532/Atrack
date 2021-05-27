@@ -21,4 +21,6 @@ public class cls {
             return false;
         }
     }
+
+    public static String Uname;
 }

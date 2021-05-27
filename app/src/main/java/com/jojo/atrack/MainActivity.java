@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                         intent.putExtra("username", res.getString(0));
                         intent.putExtra("password", res.getString(1));
+                        cls.Uname = res.getString(0);
                         startActivity(intent);
                     }
                 }

@@ -47,7 +47,7 @@ public class dbHelper extends SQLiteOpenHelper {
         contentValues.put("Title", Title);
         contentValues.put("DFrom", DFrom);
         contentValues.put("DTo", DTo);
-        contentValues.put("AddedBy", statVariables.cUser);
+        contentValues.put("AddedBy", cls.Uname);
 
         DB.insert("tblSeminar", null, contentValues);
         return true;
@@ -132,6 +132,19 @@ public class dbHelper extends SQLiteOpenHelper {
         }
     }
 
+    //get Data
+    public Cursor getData (Context context, String Query, String[] Arg){
+        try{
+            SQLiteDatabase DB = this.getReadableDatabase();
+            Cursor cursor = DB.rawQuery(Query, Arg);
+            return cursor;
+        } catch (Exception ee){
+            Toast.makeText(context, ee.getMessage().toString(), Toast.LENGTH_LONG).show();
+            return null;
+        }
+
+    }
+
     public Boolean updatelUser(String username, String password){
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -146,5 +159,7 @@ public class dbHelper extends SQLiteOpenHelper {
         long result = DB.delete("tblUser", "username=?", new String[]{username});
         return result != -1;
     }
+
+
 
 }
