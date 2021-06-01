@@ -41,7 +41,7 @@ public class viewSeminarActivity extends AppCompatActivity {
     }
 
     private void loadSeminars(){
-        SeminarCusrsor = DBH.getData(this, "SELECT SeminarID, Title, DFrom, DTo FROM tblSeminar WHERE AddedBy = ?", new String[]{cls.Uname});
+        SeminarCusrsor = DBH.getData(this, "SELECT SeminarID, Title, DFrom, DTo FROM tblSeminar WHERE AddedBy = ? ORDER BY DTo DESC;", new String[]{cls.Uname});
 
         if (SeminarCusrsor.getCount() == 0){
             Toast.makeText(this, "No record found", Toast.LENGTH_LONG).show();

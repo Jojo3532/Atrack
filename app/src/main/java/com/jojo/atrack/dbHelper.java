@@ -20,7 +20,7 @@ import java.util.Date;
 
 public class dbHelper extends SQLiteOpenHelper {
     String DB_PATH = null;
-    private static String DB_NAME = "Atrack.db";
+    private static String DB_NAME = "Atrack";
     private SQLiteDatabase myDataBase;
     private final Context myContext;
 
