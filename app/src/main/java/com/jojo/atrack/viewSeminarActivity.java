@@ -41,7 +41,7 @@ public class viewSeminarActivity extends AppCompatActivity {
             }
         });
 
-/*
+        /*
         SeminarList = new ArrayList<>();
         loadSeminars();
 

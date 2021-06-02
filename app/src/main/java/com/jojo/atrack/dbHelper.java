@@ -87,7 +87,6 @@ public class dbHelper extends SQLiteOpenHelper {
         super.close();
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
     }
@@ -103,62 +102,61 @@ public class dbHelper extends SQLiteOpenHelper {
     }
 
     //run a Query
-    public Boolean rQry (String Query, String[] Arg){
-        try{
+    public Boolean rQry(String Query, String[] Arg) {
+        try {
             SQLiteDatabase DB = this.getWritableDatabase();
             DB.rawQuery(Query, Arg);
             return true;
-        } catch (Exception ee){
+        } catch (Exception ee) {
             ee.printStackTrace();
             return false;
         }
     }
 
-
     //SELECT user
-    public Cursor checkuser(String username, String password){
+    public Cursor checkuser(String username, String password) {
         SQLiteDatabase DB = this.getReadableDatabase();
         Cursor cursor = DB.rawQuery("SELECT * FROM tblUser WHERE username=? AND password=?", new String[]{username, password});
         return cursor;
     }
 
     //insert seminar
-    public Boolean insertSeminar(Context context, String Title, String DFrom, String DTo){
+    public Boolean insertSeminar(Context context, String Title, String DFrom, String DTo) {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         SimpleDateFormat sdf1 = new SimpleDateFormat("MM/dd/yyyy");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
 
-       try{
+        try {
             Date dFrom = sdf1.parse(DFrom);
             Date dTo = sdf1.parse(DTo);
 
             DFrom = DateFormat.format("yyyy-MM-dd", dFrom).toString();
-            DTo= DateFormat.format("yyyy-MM-dd", dTo).toString();
+            DTo = DateFormat.format("yyyy-MM-dd", dTo).toString();
 
-        contentValues.put("Title", Title);
-        contentValues.put("DFrom", DFrom);
-        contentValues.put("DTo", DTo);
-        contentValues.put("AddedBy", cls.Uname);
+            contentValues.put("Title", Title);
+            contentValues.put("DFrom", DFrom);
+            contentValues.put("DTo", DTo);
+            contentValues.put("AddedBy", cls.Uname);
 
-        DB.insert("tblSeminar", null, contentValues);
-        return true;
-       } catch (Exception ee){
-           Toast.makeText(context, ee.getMessage().toString(), Toast.LENGTH_LONG).show();
-           return false;
-       }
+            DB.insert("tblSeminar", null, contentValues);
+            return true;
+        } catch (Exception ee) {
+            Toast.makeText(context, ee.getMessage().toString(), Toast.LENGTH_LONG).show();
+            return false;
+        }
     }
 
     //SELECT Participant
-    public Cursor selParticipant(String EmpID){
+    public Cursor selParticipant(String EmpID) {
         SQLiteDatabase DB = this.getReadableDatabase();
         Cursor cursor = DB.rawQuery("SELECT FirstName || ' ' || substr(MiddleName, 1,1) || '. ' || LastName AS NAME, Position FROM tblEmployee WHERE EmpID=?", new String[]{EmpID});
         return cursor;
     }
 
     //record participant
-    public Boolean insParticipant(Context context, String EmpID, String SeminarID){
-        try{
+    public Boolean insParticipant(Context context, String EmpID, String SeminarID) {
+        try {
             //check if empID & seminar exist
             SQLiteDatabase DB = this.getReadableDatabase();
             Cursor cursor = DB.rawQuery("SELECT ParticipantsID FROM tblParticipants WHERE EmpID=? AND SeminarID=?", new String[]{EmpID, SeminarID});
@@ -166,13 +164,13 @@ public class dbHelper extends SQLiteOpenHelper {
             ContentValues cVal = new ContentValues();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-            if (cursor.getCount() == 0){
+            if (cursor.getCount() == 0) {
                 //insert new in tblPaticipants
                 cVal.put("SeminarID", SeminarID);
                 cVal.put("EmpID", EmpID);
                 cVal.put("In_1", sdf.format(new Date()));
                 DBw.insert("tblParticipants", null, cVal);
-            }else {
+            } else {
                 //update Log In or out
                 ContentValues cUp = new ContentValues();
                 cUp.put("Out_2", sdf.format(new Date()));
@@ -187,30 +185,30 @@ public class dbHelper extends SQLiteOpenHelper {
                 DB.update("tblParticipants", cUp, "EmpID=? AND SeminarID=? AND In_1 IS NOT NULL AND Out_1 IS NULL", new String[]{EmpID, SeminarID});
             }
             return true;
-        } catch (Exception ee){
+        } catch (Exception ee) {
             Toast.makeText(context, ee.getMessage().toString(), Toast.LENGTH_LONG).show();
             return false;
         }
     }
 
     //get last inserted ID of tblSeminar
-    public String getSeminarID(Context context){
+    public String getSeminarID(Context context) {
         try {
             SQLiteDatabase DB = this.getReadableDatabase();
             Cursor cursor = DB.rawQuery("SELECT last_insert_rowid() AS semID FROM tblSeminar;", null);
             cursor.moveToNext();
 
             return cursor.getString(0);
-        } catch (Exception ee){
+        } catch (Exception ee) {
             Toast.makeText(context, ee.getMessage().toString(), Toast.LENGTH_LONG).show();
             return null;
         }
     }
 
     //getLog record
-    public Cursor getLogRecord(Context context, String SeminarID, String EmpID){
+    public Cursor getLogRecord(Context context, String SeminarID, String EmpID) {
         String[] Rlog = null;
-        try{
+        try {
             SQLiteDatabase DB = this.getReadableDatabase();
             ContentValues CV = new ContentValues();
             CV.put("EmpID", EmpID);
@@ -225,20 +223,19 @@ public class dbHelper extends SQLiteOpenHelper {
     }
 
     //get Data
-    public Cursor getData (Context context, String Query, String[] Arg){
-        try{
+    public Cursor getData(Context context, String Query, String[] Arg) {
+        try {
             SQLiteDatabase DB = this.getReadableDatabase();
             Cursor cursor = DB.rawQuery(Query, Arg);
             return cursor;
-        } catch (Exception ee){
+        } catch (Exception ee) {
             Toast.makeText(context, ee.getMessage().toString(), Toast.LENGTH_LONG).show();
             return null;
         }
     }
 
-
     //getSeminars
-    public SimpleCursorAdapter getSeminars(){
+    public SimpleCursorAdapter getSeminars() {
         SQLiteDatabase DB = this.getReadableDatabase();
         String columns[] = {dbHelper.KEY_semID, dbHelper.KEY_Title, dbHelper.KEY_dFrom, dbHelper.KEY_dTo};
         Cursor cursor = DB.rawQuery("SELECT SeminarID, Title, DFrom, DTo FROM tblSeminar WHERE AddedBy = ? ORDER BY DTo DESC;", new String[]{cls.Uname});
@@ -254,8 +251,7 @@ public class dbHelper extends SQLiteOpenHelper {
         return SCA;
     }
 
-
-    public Boolean updatelUser(String username, String password){
+    public Boolean updatelUser(String username, String password) {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
@@ -264,12 +260,9 @@ public class dbHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public Boolean deletetblUser(String username, String password){
+    public Boolean deletetblUser(String username, String password) {
         SQLiteDatabase DB = this.getWritableDatabase();
         long result = DB.delete("tblUser", "username=?", new String[]{username});
         return result != -1;
     }
-
-
-
 }
