@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import android.text.format.DateFormat;
 
@@ -23,6 +24,8 @@ public class dbHelper extends SQLiteOpenHelper {
     private static String DB_NAME = "Atrack";
     private SQLiteDatabase myDataBase;
     private final Context myContext;
+
+    private static final String KEY_semID = "SeminarID", KEY_Title = "Title", KEY_dFrom = "DFrom", KEY_dTo = "DTo";
 
     public dbHelper(Context context) {
         super(context, DB_NAME, null, 10);
@@ -111,17 +114,6 @@ public class dbHelper extends SQLiteOpenHelper {
         }
     }
 
-    //get Data
-    public Cursor getData (String Query, String[] Arg){
-        try{
-            SQLiteDatabase DB = this.getReadableDatabase();
-            Cursor cursor = DB.rawQuery(Query, Arg);
-            return cursor;
-        } catch (Exception ee){
-            ee.printStackTrace();
-            return null;
-        }
-    }
 
     //SELECT user
     public Cursor checkuser(String username, String password){
@@ -242,8 +234,26 @@ public class dbHelper extends SQLiteOpenHelper {
             Toast.makeText(context, ee.getMessage().toString(), Toast.LENGTH_LONG).show();
             return null;
         }
-
     }
+
+
+    //getSeminars
+    public SimpleCursorAdapter getSeminars(){
+        SQLiteDatabase DB = this.getReadableDatabase();
+        String columns[] = {dbHelper.KEY_semID, dbHelper.KEY_Title, dbHelper.KEY_dFrom, dbHelper.KEY_dTo};
+        Cursor cursor = DB.rawQuery("SELECT SeminarID, Title, DFrom, DTo FROM tblSeminar WHERE AddedBy = ? ORDER BY DTo DESC;", new String[]{cls.Uname});
+        String[] fromFieldNames = new String[]{dbHelper.KEY_semID, dbHelper.KEY_Title, dbHelper.KEY_dFrom, dbHelper.KEY_dTo};
+        int[] toViewIDs = new int[]{R.id.dSeminarID, R.id.dTitle, R.id.dDFrom, R.id.dDTo};
+        SimpleCursorAdapter SCA = new SimpleCursorAdapter(
+                myContext,
+                R.layout.single_item,
+                cursor,
+                fromFieldNames,
+                toViewIDs
+        );
+        return SCA;
+    }
+
 
     public Boolean updatelUser(String username, String password){
         SQLiteDatabase DB = this.getWritableDatabase();

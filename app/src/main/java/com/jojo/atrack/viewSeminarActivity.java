@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,8 +28,21 @@ public class viewSeminarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_seminar);
         DBH = new dbHelper(this);
         lvSeminar = findViewById(R.id.lvSeminar);
-        SeminarList = new ArrayList<>();
 
+        final SimpleCursorAdapter SCA = DBH.getSeminars();
+        lvSeminar.setAdapter(SCA);
+
+        lvSeminar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor cursor = (Cursor) SCA.getItem(position);
+                String SeminarID = cursor.getString(0);
+                Toast.makeText(viewSeminarActivity.this, SeminarID, Toast.LENGTH_LONG).show();
+            }
+        });
+
+/*
+        SeminarList = new ArrayList<>();
         loadSeminars();
 
         lvSeminar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -37,7 +51,7 @@ public class viewSeminarActivity extends AppCompatActivity {
                 String idClicked = lvSeminar.getItemAtPosition(i).toString();
                 Toast.makeText(viewSeminarActivity.this, idClicked, Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
     }
 
     private void loadSeminars(){
