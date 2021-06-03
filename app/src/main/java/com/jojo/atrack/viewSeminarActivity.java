@@ -2,6 +2,7 @@ package com.jojo.atrack;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -29,7 +30,7 @@ public class viewSeminarActivity extends AppCompatActivity {
         DBH = new dbHelper(this);
         lvSeminar = findViewById(R.id.lvSeminar);
 
-        final SimpleCursorAdapter SCA = DBH.getSeminars();
+        /*SimpleCursorAdapter SCA = DBH.getSeminars();
         lvSeminar.setAdapter(SCA);
 
         lvSeminar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -39,19 +40,20 @@ public class viewSeminarActivity extends AppCompatActivity {
                 String SeminarID = cursor.getString(0);
                 Toast.makeText(viewSeminarActivity.this, SeminarID, Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
-        /*
         SeminarList = new ArrayList<>();
         loadSeminars();
 
         lvSeminar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                String idClicked = lvSeminar.getItemAtPosition(i).toString();
-                Toast.makeText(viewSeminarActivity.this, idClicked, Toast.LENGTH_LONG).show();
+                cls.SelectedTitle = lvSeminar.getItemAtPosition(i).toString();
+
+                Intent intent = new Intent(viewSeminarActivity.this, vSParticipants.class);
+                startActivity(intent);
             }
-        });*/
+        });
     }
 
     private void loadSeminars(){

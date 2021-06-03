@@ -22,5 +22,5 @@ public class cls {
         }
     }
 
-    public static String Uname;
+    public static String Uname, SelectedTitle;
 }
