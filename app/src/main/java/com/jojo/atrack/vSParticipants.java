@@ -2,8 +2,10 @@ package com.jojo.atrack;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,11 +29,21 @@ public class vSParticipants extends AppCompatActivity {
 
         DBH = new dbHelper(this);
         lvParticipants = findViewById(R.id.lvParticipants);
-        tvTitle = findViewById(R.id.Title);
+        tvTitle = findViewById(R.id.VPTitle);
 
         ParticipantsList = new ArrayList<>();
         loadParticipants();
         tvTitle.setText(cls.SelectedTitle);
+
+        tvTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(vSParticipants.this, addParticipantsActivity.class);
+                intent.putExtra("Title", tvTitle.getText().toString());
+                intent.putExtra("SeminarID", cls.SelectedSeminarID);
+                startActivity(intent);
+            }
+        });
     }
 
     private void loadParticipants(){

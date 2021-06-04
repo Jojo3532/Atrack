@@ -18,7 +18,7 @@ public class viewSeminarActivity extends AppCompatActivity {
 
     dbHelper DBH;
     ListView lvSeminar;
-    Cursor SeminarCusrsor;
+    Cursor SeminarCursor;
     ArrayList<String> SeminarList;
     ArrayAdapter SeminarAdapter;
 
@@ -57,13 +57,14 @@ public class viewSeminarActivity extends AppCompatActivity {
     }
 
     private void loadSeminars(){
-        SeminarCusrsor = DBH.getData(this, "SELECT SeminarID, Title, DFrom, DTo FROM tblSeminar WHERE AddedBy = ? ORDER BY DTo DESC;", new String[]{cls.Uname});
+        SeminarCursor = DBH.getData(this, "SELECT SeminarID, Title, DFrom, DTo FROM tblSeminar WHERE AddedBy = ? ORDER BY DTo DESC;", new String[]{cls.Uname});
 
-        if (SeminarCusrsor.getCount() == 0){
+        if (SeminarCursor.getCount() == 0){
             Toast.makeText(this, "No record found", Toast.LENGTH_LONG).show();
         } else {
-            while (SeminarCusrsor.moveToNext()){
-                SeminarList.add(SeminarCusrsor.getString(1));
+            while (SeminarCursor.moveToNext()){
+                cls.SelectedSeminarID = SeminarCursor.getString(0);
+                SeminarList.add(SeminarCursor.getString(1));
             }
 
             SeminarAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, SeminarList);

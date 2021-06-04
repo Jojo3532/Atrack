@@ -48,10 +48,7 @@ public class addSeminarActivity extends AppCompatActivity {
                         intent.putExtra("Title", etTitle.getText().toString());
                         intent.putExtra("SeminarID", DB.getSeminarID(addSeminarActivity.this));
                         startActivity(intent);
-                    }else {
-                        //Toast.makeText(addSeminarActivity.this, "Unable to add to the database", Toast.LENGTH_LONG).show();
                     }
-
                 }else {
                     Toast.makeText(addSeminarActivity.this, "Invalid seminar details, please double check your inputs", Toast.LENGTH_LONG).show();
                 }

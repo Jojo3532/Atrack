@@ -23,4 +23,7 @@ public class cls {
     }
 
     public static String Uname, SelectedTitle;
+
+    //EmployeeDetail
+    public static String SelectedEmpID, SelectedSeminarID;
 }

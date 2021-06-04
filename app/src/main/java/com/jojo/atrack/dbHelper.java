@@ -251,6 +251,22 @@ public class dbHelper extends SQLiteOpenHelper {
         return SCA;
     }
 
+    public Boolean updateEmployee(Context context, String EmpID, String LastName, String FirstName, String MiddleName, String Position){
+        try{
+            SQLiteDatabase DB = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("LastName", LastName);
+            contentValues.put("FirstName", FirstName);
+            contentValues.put("MiddleName", MiddleName);
+            contentValues.put("Position", Position);
+            DB.update("tblEmployee", contentValues, "EmpID=?", new String[]{EmpID});
+            return true;
+        }catch (Exception e){
+            Toast.makeText(context, e.getMessage().toString(), Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
     public Boolean updatelUser(String username, String password) {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

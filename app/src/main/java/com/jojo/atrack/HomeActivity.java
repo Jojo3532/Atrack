@@ -33,7 +33,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void participants_click(View v){
-
+        Intent intent = new Intent(HomeActivity.this, Employee.class);
+        startActivity(intent);
     }
 
     @Override
