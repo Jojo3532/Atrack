@@ -213,7 +213,7 @@ public class dbHelper extends SQLiteOpenHelper {
             ContentValues CV = new ContentValues();
             CV.put("EmpID", EmpID);
             CV.put("SeminarID", SeminarID);
-            Cursor cursor = DB.rawQuery("SELECT In_1, Out_1, In_2, Out_2 FROM tblParticipants WHERE EmpID=? AND SeminarID=?;", new String[]{EmpID, SeminarID});
+            Cursor cursor = DB.rawQuery("SELECT strftime('%H:%M', In_1) in1, strftime('%H:%M', Out_1) out1, strftime('%H:%M',In_2) in2, strftime('%H:%M', Out_2) out2 FROM tblParticipants WHERE EmpID=? AND SeminarID=?;", new String[]{EmpID, SeminarID});
             cursor.moveToNext();
             return cursor;
         } catch (Exception ee) {
