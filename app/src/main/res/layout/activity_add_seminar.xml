@@ -14,7 +14,8 @@
         android:layout_marginStart="10sp"
         android:text="Add Seminar"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
     <EditText
         android:id="@+id/xadsTitle"

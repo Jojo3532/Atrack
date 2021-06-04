@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".addParticipantsActivity">
+    tools:context=".addParticipantsActivity"
+    android:paddingLeft="15sp"
+    android:paddingRight="15sp">
 
     <TextView
         android:id="@+id/xadpTitle"
@@ -14,7 +16,8 @@
         android:layout_height="wrap_content"
         android:text="Add Participants"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
     <ImageView
         android:id="@+id/xpartImg"

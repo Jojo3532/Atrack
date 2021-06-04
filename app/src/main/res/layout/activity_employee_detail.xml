@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".EmployeeDetail">
+    tools:context=".EmployeeDetail"
+    android:paddingLeft="15sp"
+    android:paddingRight="15sp">
 
     <EditText
         android:id="@+id/LastName"

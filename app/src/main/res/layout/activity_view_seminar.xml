@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"
-    tools:context=".viewSeminarActivity">
+    tools:context=".viewSeminarActivity"
+    android:paddingLeft="15sp"
+    android:paddingRight="15sp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="All Seminars"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:paddingLeft="15sp"
+    android:paddingRight="15sp">
 
     <TextView
         android:layout_width="wrap_content"
